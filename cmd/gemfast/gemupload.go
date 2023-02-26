@@ -17,7 +17,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var uploadCmd = &cobra.Command{
+var gemUploadCmd = &cobra.Command{
 	Use:   "upload [gem]",
 	Short: "Upload a gem to the gemfast server",
 	Args:  cobra.MinimumNArgs(1),
@@ -27,7 +27,7 @@ var uploadCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(uploadCmd)
+	gemCmd.AddCommand(gemUploadCmd)
 }
 
 type GemfastConfig struct {

@@ -4,17 +4,22 @@ import (
 	"fmt"
 	"os"
 
-	// "github.com/gscho/gemfast/internal/config"
+	"github.com/gemfast/cli/gemfast"
 	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
 	Use:   "gemfast",
-	Short: "gemfast is a private rubygems server",
+	Short: "The gemfast server command line interface",
 }
 
+var client *gemfast.Client
+
 func init() {
-	// config.InitConfig()
+	client = gemfast.NewClient("http://localhost:8881", &gemfast.LocalAuth{JWTToken: os.Getenv("GEMFAST_AUTH_TOKEN")})
+	if config := gemfast.ReadInConfig(); config != nil {
+		client = gemfast.NewClient("http://localhost:8881", &gemfast.LocalAuth{JWTToken: config.Token})
+	}
 }
 
 func Execute() {
